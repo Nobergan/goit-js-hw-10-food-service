@@ -8,7 +8,7 @@ const bodyRef = document.querySelector('body');
 
 checkboxRef.addEventListener('change', handleCheckboxChange);
 
-bodyRef.classList.add('light-theme');
+// bodyRef.classList.add('light-theme');
 defaultTheme();
 
 function handleCheckboxChange() {
@@ -27,7 +27,6 @@ function handleCheckboxOff() {
 function handleCheckboxOn() {
   document.body.classList.replace(Theme.LIGHT, Theme.DARK);
   localStorage.setItem('theme', 'dark-theme');
-  checkboxRef.checked = true;
 }
 
 function defaultTheme() {
@@ -37,6 +36,9 @@ function defaultTheme() {
     bodyRef.classList.add(Theme.LIGHT);
   } else {
     bodyRef.classList.add(savedTheme);
+  }
+
+  if (savedTheme === Theme.DARK) {
     checkboxRef.checked = true;
   }
 }
