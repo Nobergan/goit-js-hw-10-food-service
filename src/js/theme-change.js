@@ -1,5 +1,3 @@
-// import themes from './theme';
-
 const Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme',
@@ -10,6 +8,7 @@ const bodyRef = document.querySelector('body');
 
 checkboxRef.addEventListener('change', handleCheckboxChange);
 
+bodyRef.classList.add('light-theme');
 defaultTheme();
 
 function handleCheckboxChange() {
@@ -21,32 +20,55 @@ function handleCheckboxChange() {
 }
 
 function handleCheckboxOff() {
-  document.body.classList.add(Theme.LIGHT);
-  document.body.classList.remove(Theme.DARK);
-  localStorage.setItem('theme', JSON.stringify(Theme.LIGHT));
+  document.body.classList.replace(Theme.DARK, Theme.LIGHT);
+  localStorage.setItem('theme', 'light-theme');
 }
 
 function handleCheckboxOn() {
-  document.body.classList.add(Theme.DARK);
-  document.body.classList.remove(Theme.LIGHT);
-  localStorage.setItem('theme', JSON.stringify(Theme.DARK));
+  document.body.classList.replace(Theme.LIGHT, Theme.DARK);
+  localStorage.setItem('theme', 'dark-theme');
   checkboxRef.checked = true;
 }
 
 function defaultTheme() {
   const savedTheme = localStorage.getItem('theme');
-  const parsedTheme = JSON.parse(savedTheme);
 
-  // if (parsedTheme === Theme.DARK) {
-  //   bodyRef.classList.add(Theme.DARK);
-  //   checkboxRef.checked = true;
-  // }
-
-  if (savedTheme === '') {
+  if (!savedTheme) {
     bodyRef.classList.add(Theme.LIGHT);
-    checkboxRef.checked = true;
   } else {
-    bodyRef.classList.add(parsedTheme);
-    // checkboxRef.checked = false;
+    bodyRef.classList.add(savedTheme);
+    checkboxRef.checked = true;
   }
 }
+
+// const Theme = {
+//   LIGHT: 'light-theme',
+//   DARK: 'dark-theme',
+// };
+
+// const checkboxRef = document.querySelector('#theme-switch-toggle');
+// const bodyRef = document.querySelector('body');
+
+// checkboxRef.addEventListener('change', handleCheckboxChange);
+
+// bodyRef.classList.add('light-theme');
+// defaultTheme();
+
+// function handleCheckboxChange() {
+//   if (checkboxRef.checked) {
+//     bodyRef.classList.replace(Theme.LIGHT, Theme.DARK);
+//     localStorage.setItem('theme', 'dark-theme');
+//   } else {
+//     bodyRef.classList.replace(Theme.DARK, Theme.LIGHT);
+//     localStorage.setItem('theme', 'light-theme');
+//   }
+// }
+
+// function defaultTheme() {
+//   const savedTheme = localStorage.getItem('theme');
+
+//   if (savedTheme === 'dark-theme') {
+//     bodyRef.classList.add('dark-theme');
+//     checkboxRef.checked = true;
+//   }
+// }
